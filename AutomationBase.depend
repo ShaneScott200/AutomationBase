@@ -1,0 +1,74 @@
+# depslib dependency file v1.0
+1548611733 source:/home/pi/Documents/Code/AutomationBase/main.cpp
+	<iostream>
+	"./include/base.h"
+	<wiringPi.h>
+
+1548468571 source:/home/pi/Documents/Code/AutomationBase/src/DS18B20.cpp
+	"../include/DS18B20.h"
+
+1548467721 /home/pi/Documents/Code/AutomationBase/include/DS18B20.h
+	<inttypes.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+
+1548537615 /home/pi/Documents/Code/AutomationBase/include/base.h
+	<string>
+	"DS18B20.h"
+	</usr/include/mosquittopp.h>
+	"ArduiDHT.h"
+	</usr/include/pcf8574.h>
+	</usr/include/wiringPi.h>
+
+1548470269 /home/pi/Documents/Code/AutomationBase/include/ArduiPi_OLED.h
+	"./bcm2835.h"
+	"./Adafruit_GFX.h"
+
+1548467527 /home/pi/Documents/Code/AutomationBase/include/Adafruit_GFX.h
+
+1548610384 source:/home/pi/Documents/Code/AutomationBase/src/base.cpp
+	"../include/base.h"
+	<iostream>
+
+1548470032 source:/home/pi/Documents/Code/AutomationBase/src/ArduiPi_OLED.cpp
+	"../include/ArduiPi_OLED_lib.h"
+	"../include/Adafruit_GFX.h"
+	"../include/ArduiPi_OLED.h"
+	"../include/bcm2835.h"
+
+1548469260 /home/pi/Documents/Code/AutomationBase/include/ArduiPi_OLED_lib.h
+	<stdio.h>
+	<stdarg.h>
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	"bcm2835.h"
+
+1548464567 /home/pi/Documents/Code/AutomationBase/include/bcm2835.h
+	<stdint.h>
+
+1548469661 source:/home/pi/Documents/Code/AutomationBase/src/Adafruit_GFX.cpp
+	"../include/ArduiPi_OLED_lib.h"
+	"../include/Adafruit_GFX.h"
+	"../include/glcdfont.h"
+
+1548469564 /home/pi/Documents/Code/AutomationBase/include/glcdfont.h
+
+1548526994 /home/pi/Documents/Code/AutomationBase/include/dht.h
+	<wiringPi.h>
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+
+1548527238 source:/home/pi/Documents/Code/AutomationBase/src/dht.cpp
+	"../include/dht.h"
+
+1548609849 /home/pi/Documents/Code/AutomationBase/include/ArduiDHT.h
+	<wiringPi.h>
+
+1548611657 source:/home/pi/Documents/Code/AutomationBase/src/ArduiDHT.cpp
+	<iostream>
+	"../include/ArduiDHT.h"
+
