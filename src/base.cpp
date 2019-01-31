@@ -90,7 +90,7 @@ double Base::ReadBaseTemperature() // (from DS18B20)
 // DHT Functions
 double Base::ReadTemperature() // (from DHT22 if installed)  --> need to differentiate between DHT & DS18B20
 {
-    dht.read_dht22_dat();
+    //return dht.read_dht22_dat();
     return dht.readTemperature();
     //return -99999;
 }

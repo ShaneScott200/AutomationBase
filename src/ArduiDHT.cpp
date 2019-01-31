@@ -56,16 +56,20 @@ float DHT::readTemperature(bool S, bool force) {
       break;
     case DHT22:
     case DHT21:
-      //f = ((word)(data[2] & 0x7F)) << 8 | data[3];
-      f = ((data[2] & 0x7F)) << 8 | data[3];
-      f *= 0.1;
-      if (data[2] & 0x80) {
+        //f = ((word)(data[2] & 0x7F)) << 8 | data[3];
+        /*f = ((data[2] & 0x7F)) << 8 | data[3];
+        f *= 0.1;
+        if (data[2] & 0x80) {
         f *= -1;
-      }
-      if(S) {
-        f = convertCtoF(f);
-      }
-      break;
+        }*/
+        f = (float)(data[2] & 0x7F)* 256 + (float)data[3];
+        f /= 10.0;
+        if ((data[2] & 0x80) != 0)  f *= -1;
+        if(S)
+        {
+            f = convertCtoF(f);
+        }
+        break;
     }
   }
   return f;
@@ -90,14 +94,16 @@ float DHT::readHumidity(bool force) {
     case DHT22:
     case DHT21:
       //f = ((word)data[0]) << 8 | data[1];
-      f = (data[0]) << 8 | data[1];
-      f *= 0.1;
+      //f = (data[0]) << 8 | data[1];
+      //f *= 0.1;
+        f = (float)data[0] * 256 + (float)data[1];
+        f /= 10;
       break;
     }
   }
   return f;
 }
-
+/*
 bool DHT::read(bool force) {
   // Check if sensor was read less than two seconds ago and return early
   // to use last reading.
@@ -207,7 +213,8 @@ bool DHT::read(bool force) {
     return _lastresult;
   }
 }
-
+*/
+/*
 // Expect the signal line to be at the specified level for a period of time and
 // return a count of loop cycles spent at that level (this cycle count can be
 // used to compare the relative time of two pulses).  If more than a millisecond
@@ -229,7 +236,7 @@ long DHT::expectPulse(bool level) {
 
   return count;
 }
-
+*/
 
 
 /*static int sizecvt(const int read)
@@ -245,6 +252,61 @@ long DHT::expectPulse(bool level) {
   return (int)read;
 }*/
 
+bool DHT::read(bool force)
+{
+    #define MAXTIMINGS 85
+    int DHTPIN = 2;
+    //int dht22_dat[5] = {0,0,0,0,0};
+
+    int laststate = HIGH;
+    int counter = 0;
+    int j = 0, i;
+
+    data[0] = data[1] = data[2] = data[3] = data[4] = 0;
+
+    // pull pin down for 18 milliseconds
+    pinMode(DHTPIN, OUTPUT);
+    digitalWrite(DHTPIN, HIGH);
+    delay(500);
+    digitalWrite(DHTPIN, LOW);
+    delay(20);
+    // prepare to read the pin
+    pinMode(DHTPIN, INPUT);
+
+    // detect change and read data
+    for ( i=0; i< MAXTIMINGS; i++)
+    {
+        counter = 0;
+        //while (sizecvt(digitalRead(DHTPIN)) == laststate) {
+        while (digitalRead(DHTPIN) == laststate)
+        {
+            counter++;
+            delayMicroseconds(2);
+            if (counter == 255) {
+            break;
+            }
+        }
+        //laststate = sizecvt(digitalRead(DHTPIN));
+        laststate = digitalRead(DHTPIN);
+
+        if (counter == 255) break;
+
+        // ignore first 3 transitions
+        if ((i >= 4) && (i%2 == 0))
+        {
+            // shove each bit into the storage bytes
+            data[j/8] <<= 1;
+            if (counter > 16)
+            data[j/8] |= 1;
+            j++;
+        }
+    }
+}
+
+
+
+/// ********** ORIGINAL CODE **********
+/*
 int DHT::read_dht22_dat()
 {
     #define MAXTIMINGS 85
@@ -316,4 +378,4 @@ int DHT::read_dht22_dat()
     cout << "CRC Check: " << dht22_dat[4] << " should equal: " << (dht22_dat[0] + dht22_dat[1] + dht22_dat[2] + dht22_dat[3]) << endl;
     return 0;
   }
-}
+}*/

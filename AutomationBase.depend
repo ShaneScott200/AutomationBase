@@ -72,3 +72,37 @@
 	<iostream>
 	"../include/ArduiDHT.h"
 
+1548896508 source:/home/pi/Documents/github/AutomationBase/main.cpp
+	<iostream>
+	"./include/base.h"
+	<wiringPi.h>
+
+1548806918 /home/pi/Documents/github/AutomationBase/include/base.h
+	<string>
+	"DS18B20.h"
+	</usr/include/mosquittopp.h>
+	"ArduiDHT.h"
+	</usr/include/pcf8574.h>
+	</usr/include/wiringPi.h>
+
+1548806918 /home/pi/Documents/github/AutomationBase/include/DS18B20.h
+	<inttypes.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+
+1548806918 /home/pi/Documents/github/AutomationBase/include/ArduiDHT.h
+	<wiringPi.h>
+
+1548896674 source:/home/pi/Documents/github/AutomationBase/src/ArduiDHT.cpp
+	<iostream>
+	"../include/ArduiDHT.h"
+
+1548896147 source:/home/pi/Documents/github/AutomationBase/src/base.cpp
+	"../include/base.h"
+	<iostream>
+
+1548806918 source:/home/pi/Documents/github/AutomationBase/src/DS18B20.cpp
+	"../include/DS18B20.h"
+

@@ -23,17 +23,17 @@ int main()
     cout << "Temp: " << b.ReadBaseTemperature() << endl;
 
     // temperature/humidity
-    b.ConfigureDHT(2, 11);
+    b.ConfigureDHT(2, 22);
     b.ReadTemperature();
-    //cout << "Temp: " << b.ReadTemperature() << endl;
-    //cout << "Humidity: " << b.ReadHumidity() << endl;
+    cout << "Temp: " << b.ReadTemperature() << endl;
+    cout << "Humidity: " << b.ReadHumidity() << endl;
 
     // DIO with pcf8574
     cout << "Toggle pin 0 & 1HIGH and LOW (5 times): " <<  endl;
     int pcf8574Address = 0x20;
     b.ConfigurePCF8574(pcf8574Address);
     counter = 0;
-    while (counter < 5)
+    while (counter < 3)
     {
         //b.ToggleOutput(0, HIGH, 500);
         cout << "Iteration: " <<
@@ -60,13 +60,22 @@ int main()
     b.PublishMessage("test/anothertopic", 52, "this is a very long message from automation program");
 
     counter = 0;
-    while (counter < 100)
+    while (counter < 10)
     {
-        float bt = b.ReadBaseTemperature();
+ //       float bt = b.ReadBaseTemperature();
         float t = b.ReadTemperature();
         float h = b.ReadHumidity();
         cout << "Iteration: " << counter << "\t" /*<< bt << "\t" << t << "\t" << h << endl*/;
         counter++;
+
+        char* enviroData = "";
+        char buffer[36] = "";
+        int ret = snprintf(buffer, sizeof buffer, "T:%f [C] H:%f [%]", t,h);
+//        cout << buffer << endl;
+        if (ret < 0) {
+          return EXIT_FAILURE;
+        }
+        b.PublishMessage("test/enviroData", 52,buffer);
     }
 
     return 0;
